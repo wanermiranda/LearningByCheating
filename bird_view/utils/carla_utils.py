@@ -57,7 +57,7 @@ COLORS = [
 
 
 TOWNS = ['Town01', 'Town02', 'Town03', 'Town04']
-VEHICLE_NAME = 'vehicle.ford.mustang'
+VEHICLE_NAME = 'vehicle.mustang.mustang'
 
 def is_within_distance_ahead(target_location, current_location, orientation, max_distance, degree=60):
     u = np.array([
@@ -356,9 +356,11 @@ class CarlaWrapper(object):
         self._town_name = town
         self._world = self._client.load_world(town)
         self._map = self._world.get_map()
-
+        import time
         self._blueprints = self._world.get_blueprint_library()
-        print (f'***** Debuging {self._blueprints.filter(vehicle_name)}')
+        time.sleep(1)
+        
+        print (f'***** Debuging {self._blueprints.filter(vehicle_name), vehicle_name}')
         self._vehicle_bp = np.random.choice(self._blueprints.filter(vehicle_name))
         self._vehicle_bp.set_attribute('role_name', 'hero')
 
@@ -416,7 +418,7 @@ class CarlaWrapper(object):
                 vehicle = self._world.try_spawn_actor(blueprint, np.random.choice(spawn_points))
 
             vehicle.set_autopilot(True)
-            vehicle.start_dtcrowd()
+            # vehicle.start_dtcrowd()
 
             self._actor_dict['vehicle'].append(vehicle)
 
@@ -525,7 +527,7 @@ class CarlaWrapper(object):
     def spawn_player(self):
         self._player = self._world.spawn_actor(self._vehicle_bp, self._start_pose)
         self._player.set_autopilot(False)
-        self._player.start_dtcrowd()
+        # self._player.start_dtcrowd()
         self._actor_dict['player'].append(self._player)
         
 
@@ -603,9 +605,9 @@ class CarlaWrapper(object):
                 }
 
     def clean_up(self):
-        for vehicle in self._actor_dict['vehicle']:
+        # for vehicle in self._actor_dict['vehicle']:
             # continue
-            vehicle.stop_dtcrowd()
+            # vehicle.stop_dtcrowd()
         
         for controller in self._actor_dict['ped_controller']:
             controller.stop()
@@ -623,7 +625,8 @@ class CarlaWrapper(object):
         self._time_start = time.time()
         
         if self._player:
-            self._player.stop_dtcrowd()
+            # self._player.stop_dtcrowd()
+            self._player.destroy()
         self._player = None
 
         # Clean-up cameras

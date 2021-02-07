@@ -166,6 +166,7 @@ class World(object):
         cam_pos_index = self.camera_manager._transform_index if self.camera_manager is not None else 0
         # Get a random blueprint.
         blueprint = random.choice(self.world.get_blueprint_library().filter(self._actor_filter))
+        logging.info(self.world.get_blueprint_library().filter(self._actor_filter))
         blueprint.set_attribute('role_name', 'hero')
         if blueprint.has_attribute('color'):
             color = random.choice(blueprint.get_attribute('color').recommended_values)
@@ -404,7 +405,7 @@ class HUD(object):
         collision = [colhist[x + self.frame_number - 200] for x in range(0, 200)]
         max_col = max(1.0, max(collision))
         collision = [x / max_col for x in collision]
-        vehicles = world.world.get_actors().filter('vehicle.*')
+        
         self._info_text = [
             'Server:  % 16.0f FPS' % self.server_fps,
             'Client:  % 16.0f FPS' % clock.get_fps(),
