@@ -20,7 +20,7 @@ cd ..
 conda activate carlapy3
 
 # Install carla client
-easy_install-3.7 libs/carla-0.9.6-py3.7-linux-x86_64.egg
+easy_install-3.7 libs/carla-0.9.11-py3.7-linux-x86_64.egg
 
 # Download model checkpoints
 mkdir -p ckpts/image
@@ -33,4 +33,4 @@ cd ckpts/priveleged
 wget http://www.cs.utexas.edu/~dchen/lbc_release/ckpts/privileged/model-128.th
 wget http://www.cs.utexas.edu/~dchen/lbc_release/ckpts/privileged/config.json
 cd ../..
-docker build . -t laser-lab/carla-dist:9.6.0
+docker build . -t laser-lab/carla-dist:9.11.0

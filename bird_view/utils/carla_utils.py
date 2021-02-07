@@ -358,6 +358,7 @@ class CarlaWrapper(object):
         self._map = self._world.get_map()
 
         self._blueprints = self._world.get_blueprint_library()
+        print (f'***** Debuging {self._blueprints.filter(vehicle_name)}')
         self._vehicle_bp = np.random.choice(self._blueprints.filter(vehicle_name))
         self._vehicle_bp.set_attribute('role_name', 'hero')
 
